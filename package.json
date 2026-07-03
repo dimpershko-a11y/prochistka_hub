@@ -1,0 +1,19 @@
+{
+  "name": "prochistka-hub",
+  "version": "0.1.0",
+  "private": true,
+  "description": "Modular PRO-CHISTKA Hub for calculator, dashboard, documents, CRM, orders, expenses and operations.",
+  "type": "module",
+  "scripts": {
+    "dev": "vite --host 0.0.0.0",
+    "build": "vite build",
+    "preview": "vite preview --host 0.0.0.0",
+    "lint:structure": "node scripts/check-structure.js"
+  },
+  "dependencies": {
+    "@vitejs/plugin-react": "latest",
+    "vite": "latest",
+    "typescript": "latest"
+  },
+  "devDependencies": {}
+}

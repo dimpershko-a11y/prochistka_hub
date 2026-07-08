@@ -10,9 +10,10 @@
       const preferredTheme = window.matchMedia('(prefers-color-scheme: light)').matches ? 'light' : 'dark';
       document.documentElement.dataset.theme = storedTheme || preferredTheme;
     </script>
+    <link rel="stylesheet" href="./src/app/styles.css" />
   </head>
   <body>
     <div id="app"></div>
-    <script type="module" src="/src/main.js"></script>
+    <script type="module" src="./src/main.js"></script>
   </body>
 </html>

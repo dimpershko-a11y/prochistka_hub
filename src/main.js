@@ -1,4 +1,5 @@
 import { createAppShell } from './app/app-shell.js';
+import { createHomePage } from './app/home-page.js';
 import { createRouter } from './app/router.js';
 import { modules } from './app/module-registry.js';
 import { shared } from './shared/index.js';
@@ -6,9 +7,14 @@ import { appConfig } from './config/app-config.js';
 import './app/styles.css';
 
 const root = document.querySelector('#app');
+const homeModule = createHomePage({
+  modules,
+  config: appConfig
+});
 
 const router = createRouter({
   modules,
+  homeModule,
   shared,
   config: appConfig
 });
@@ -16,6 +22,7 @@ const router = createRouter({
 createAppShell({
   root,
   modules,
+  homeModule,
   router,
   shared,
   config: appConfig

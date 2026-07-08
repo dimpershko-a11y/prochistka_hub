@@ -1,4 +1,4 @@
-export function createRouter({ modules, shared, config }) {
+export function createRouter({ modules, homeModule, shared, config }) {
   let currentModule = null;
   let outlet = null;
 
@@ -8,7 +8,7 @@ export function createRouter({ modules, shared, config }) {
 
   function findModuleByRoute(route) {
     if (route === '/') {
-      return modules[0];
+      return homeModule || modules[0];
     }
 
     return modules.find((module) => module.moduleManifest.route === route) || modules[0];
@@ -37,6 +37,15 @@ export function createRouter({ modules, shared, config }) {
       eventBus: shared.eventBus,
       navigate
     });
+
+    window.dispatchEvent(
+      new CustomEvent('hub:route-change', {
+        detail: {
+          route,
+          module: nextModule.moduleManifest
+        }
+      })
+    );
   }
 
   return {

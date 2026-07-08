@@ -1,0 +1,80 @@
+---
+target: src/app/home-page.js
+total_score: 25
+p0_count: 0
+p1_count: 2
+timestamp: 2026-07-07T19-49-23Z
+slug: src-app-home-page-js
+---
+# PRO-CHISTKA Hub Homepage Critique
+
+Method: degraded single-context after sub-agent failure/timeout. Target: src/app/home-page.js. Live URL checked at http://127.0.0.1:5173/.
+
+## Design Health Score
+
+| # | Heuristic | Score | Key Issue |
+|---|---:|---:|---|
+| 1 | Visibility of system status | 2 | Current location is clear, but search/actions do not confirm outcomes yet. |
+| 2 | Match system / real world | 3 | Cleaning-ops language is clear; some dashboard shorthand still needs real workflow backing. |
+| 3 | User control and freedom | 2 | Navigation exists, but no clear escape/undo/filter reset patterns yet. |
+| 4 | Consistency and standards | 3 | Strong component rhythm and theme tokens. |
+| 5 | Error prevention | 2 | Mostly static/prototype surface; no guardrails for actions yet. |
+| 6 | Recognition rather than recall | 3 | Modules are visible and labeled; mobile nav hides more items off-screen. |
+| 7 | Flexibility and efficiency | 2 | Good hub entry points, but no working search/shortcuts/recent items yet. |
+| 8 | Aesthetic and minimalist design | 3 | Premium and restrained, but first fold is dense. |
+| 9 | Error recovery | 2 | No visible error/recovery patterns on this screen yet. |
+| 10 | Help and documentation | 1 | No contextual help for first-time managers/field users. |
+| Total |  | 25/40 | Acceptable foundation; needs UX hardening before real users. |
+
+## Audit Health Score
+
+| Dimension | Score | Key Finding |
+|---|---:|---|
+| Accessibility | 3/4 | Labels/focus are present; top search lacks explicit accessible name beyond placeholder/label wrapper. |
+| Performance | 3/4 | Motion is transform/opacity-based; sticky backdrop blur is a scroll cost risk. |
+| Theming | 4/4 | Dark/light token system is strong. |
+| Responsive | 3/4 | Mobile layout works; horizontal nav discoverability is weak. |
+| Anti-patterns | 3/4 | No detector hits; slight premium-SaaS bento familiarity remains. |
+| Total | 16/20 | Good. |
+
+## Anti-Patterns Verdict
+
+Does it look AI-generated immediately? No. It reads like a competent premium SaaS dashboard, not a cheap generated landing. Risk remains in the familiar bento vocabulary, soft surface gradients, and decorative calculator orbit; real operational data and sharper module affordances will make it feel more proprietary.
+
+Deterministic scan: `node .agents/skills/impeccable/scripts/detect.mjs --json src/app/home-page.js` returned `[]` with exit 0.
+
+## Priority Issues
+
+[P1] Search looks functional but is not wired. Impact: owners/managers will trust the search bar for orders, clients, documents, then get no result or feedback. Fix: implement search, disable it with honest copy, or convert it to a visible upcoming feature state.
+
+[P1] Reveal motion is too slow and slightly fragile for an operational hub. `--motion-reveal: 520ms`; full-page screenshots show lower cards still faded because visibility depends on intersection. Fix: reduce to ~220-280ms, reveal earlier, and add a timeout/failsafe.
+
+[P2] Mobile top nav hides most modules without a strong scroll cue. Fix: add fade/edge cue, compact overflow menu, or preserve a clearer active+more affordance.
+
+[P2] First desktop fold is dense: hero, two major panels, status stack, CTAs, and module heading all compete. Fix: make one operational question dominant and compress secondary proof/status.
+
+[P2] Defaulting to system light weakens the requested premium dark-first direction. Fix: choose dark as product default or make brand preference explicit.
+
+[P3] Sticky `backdrop-filter: blur(1.2rem)` can cost scroll performance on field laptops/phones. Fix: use a more opaque topbar or lower blur.
+
+## Animation Review
+
+| Before | After | Why |
+|---|---|---|
+| `--motion-reveal: 520ms` | 220-280ms or remove page-load reveal | Daily dashboard should feel task-ready; UI motion should stay under 300ms. |
+| IO-gated `.reveal-item` visibility | Keep default visible plus failsafe reveal | Prevents faded content in screenshots/slow observers. |
+| Sticky `backdrop-filter: blur(1.2rem)` | Opaque/tinted surface or lower blur | Blur on sticky chrome can be costly during scroll. |
+| Hover transforms under pointer media | Keep | Good: no touch-hostile hover dependency. |
+| Reduced-motion CSS + JS guard | Keep, simplify later if desired | Content reveals immediately for reduced-motion users. |
+
+Verdict: Block motion polish before ship, approve the general motion architecture. No `transition: all`, no `ease-in`, no `scale(0)`, no keyframes, no layout-property animation found.
+
+## Positive Findings
+
+Strong product-shell direction, good tokenized theming, clean module IA, readable copy, no chaotic icon system, no acid colors, no detector hits, good reduced-motion and hover gating.
+
+## Questions
+
+1. Should the next pass prioritize UX truthfulness or visual polish? Options: wire/disable search; reduce reveal and nav issues; tighten first-fold density.
+2. Should the product default be dark-first? Options: dark by default; system preference; keep light default for field readability.
+3. Scope for next pass: top 3 issues only; all P1/P2; motion-only cleanup.

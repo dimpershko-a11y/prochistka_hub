@@ -75,3 +75,17 @@ docs/                  # архитектура, правила разработ
 ## Текущий статус
 
 Репозиторий подготовлен как архитектурный каркас. Старый чат остаётся только для бизнес-дашборда, этот репозиторий и этот чат — только для PRO-CHISTKA Hub.
+
+## Публикация в браузере
+
+Приложение публикуется через GitHub Pages из production-сборки Vite.
+
+После push в ветку `hub-v1` или `main` workflow `Deploy GitHub Pages` соберёт `dist` и опубликует сайт.
+
+URL сайта:
+
+```txt
+https://dimpershko-a11y.github.io/prochistka_hub/
+```
+
+В настройках репозитория GitHub нужно выбрать `Settings → Pages → Source → GitHub Actions`.

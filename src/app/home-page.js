@@ -131,12 +131,22 @@ function setupReveal(container) {
         entry.target.classList.add('is-visible');
         observer.unobserve(entry.target);
       });
+
+      if (items.every((item) => item.classList.contains('is-visible'))) {
+        window.clearTimeout(revealFallback);
+        observer.disconnect();
+      }
     },
     {
-      threshold: 0.16,
-      rootMargin: '0px 0px -8% 0px'
+      threshold: 0.12,
+      rootMargin: '0px 0px 12% 0px'
     }
   );
+
+  const revealFallback = window.setTimeout(() => {
+    items.forEach((item) => item.classList.add('is-visible'));
+    observer.disconnect();
+  }, 720);
 
   requestAnimationFrame(() => {
     page?.classList.add('is-motion-ready');

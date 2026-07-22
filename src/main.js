@@ -11,6 +11,8 @@ const homeModule = createHomePage({
   config: appConfig
 });
 
+modules.forEach((module) => module.initialize?.({ shared }));
+
 const router = createRouter({
   modules,
   homeModule,

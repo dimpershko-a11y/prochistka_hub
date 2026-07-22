@@ -19,6 +19,6 @@ export const eventBus = {
 
   emit(eventName, payload) {
     const callbacks = this.listeners.get(eventName) || [];
-    callbacks.forEach((callback) => callback(payload));
+    return callbacks.map((callback) => callback(payload));
   }
 };

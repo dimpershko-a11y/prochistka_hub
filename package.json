@@ -6,9 +6,10 @@
   "type": "module",
   "scripts": {
     "dev": "vite --host 0.0.0.0",
-    "build": "vite build",
+    "build": "vite build --base=/prochistka_hub/",
     "preview": "vite preview --host 0.0.0.0",
-    "lint:structure": "node scripts/check-structure.js"
+    "lint:structure": "node scripts/check-structure.js",
+    "test": "node --test --test-isolation=none"
   },
   "dependencies": {
     "@vitejs/plugin-react": "latest",

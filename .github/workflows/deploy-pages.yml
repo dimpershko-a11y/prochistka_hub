@@ -5,6 +5,7 @@ on:
     branches:
       - hub-v1
       - main
+      - feature/calculator-orders-v1-integration
   workflow_dispatch:
 
 permissions:

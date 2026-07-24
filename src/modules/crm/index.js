@@ -1,3 +1,5 @@
+import { renderModulePlaceholder } from '../../shared/ui/module-placeholder.js';
+
 export const moduleManifest = {
   id: 'crm',
   title: 'CRM',
@@ -8,7 +10,15 @@ export const moduleManifest = {
 };
 
 export function mount(container) {
-  container.innerHTML = `<article class="module-card"><h1>${moduleManifest.title}</h1><p>${moduleManifest.description}</p></article>`;
+  container.innerHTML = renderModulePlaceholder({
+    manifest: moduleManifest,
+    status: 'Пилотный контур',
+    actions: [
+      'Собрать карточку клиента и историю касаний',
+      'Добавить напоминания по повторным обращениям',
+      'Связать CRM с заказами и документами'
+    ]
+  });
 }
 
 export function unmount() {}

@@ -29,14 +29,29 @@ function escapeHtml(value) {
     .replaceAll("'", '&#039;');
 }
 
+function readStoredTheme() {
+  try {
+    return localStorage.getItem(THEME_STORAGE_KEY);
+  } catch {
+    return null;
+  }
+}
+
 function getActiveTheme() {
-  return document.documentElement.dataset.theme === 'light' ? 'light' : 'dark';
+  const domTheme = document.documentElement.dataset.theme;
+  if (domTheme === 'light' || domTheme === 'dark') return domTheme;
+
+  return readStoredTheme() === 'light' ? 'light' : 'dark';
 }
 
 function setTheme(theme) {
   document.documentElement.dataset.themeSwitching = 'true';
   document.documentElement.dataset.theme = theme;
-  localStorage.setItem(THEME_STORAGE_KEY, theme);
+  try {
+    localStorage.setItem(THEME_STORAGE_KEY, theme);
+  } catch {
+    // Theme persistence is optional; keep the current in-memory theme if storage is unavailable.
+  }
   window.setTimeout(() => {
     delete document.documentElement.dataset.themeSwitching;
   }, 160);
@@ -48,6 +63,7 @@ export function createAppShell({ root, modules, homeModule, router, config }) {
   }
 
   const currentTheme = getActiveTheme();
+  document.documentElement.dataset.theme = currentTheme;
   const navItems = [homeModule, ...modules];
   const searchItems = navItems.map((module) => {
     const { id, title, description, route } = module.moduleManifest;

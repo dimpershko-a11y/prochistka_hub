@@ -1,3 +1,5 @@
+import { renderModulePlaceholder } from '../../shared/ui/module-placeholder.js';
+
 export const moduleManifest = {
   id: 'employees',
   title: 'Сотрудники',
@@ -8,7 +10,15 @@ export const moduleManifest = {
 };
 
 export function mount(container) {
-  container.innerHTML = `<article class="module-card"><h1>${moduleManifest.title}</h1><p>${moduleManifest.description}</p></article>`;
+  container.innerHTML = renderModulePlaceholder({
+    manifest: moduleManifest,
+    status: 'Пилотный контур',
+    actions: [
+      'Описать роли, ставки и контакты сотрудников',
+      'Связать профили с табелем и заказами',
+      'Добавить статус допуска к объектам'
+    ]
+  });
 }
 
 export function unmount() {}

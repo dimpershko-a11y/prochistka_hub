@@ -1,3 +1,5 @@
+import { renderModulePlaceholder } from '../../shared/ui/module-placeholder.js';
+
 export const moduleManifest = {
   id: 'timesheet',
   title: 'Табель',
@@ -8,7 +10,15 @@ export const moduleManifest = {
 };
 
 export function mount(container) {
-  container.innerHTML = `<article class="module-card"><h1>${moduleManifest.title}</h1><p>${moduleManifest.description}</p></article>`;
+  container.innerHTML = renderModulePlaceholder({
+    manifest: moduleManifest,
+    status: 'Пилотный контур',
+    actions: [
+      'Собрать смены по заказам и сотрудникам',
+      'Развести ставки, доплаты и штрафы',
+      'Подготовить экспорт выплат за период'
+    ]
+  });
 }
 
 export function unmount() {}

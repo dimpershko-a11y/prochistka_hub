@@ -1,3 +1,5 @@
+import { renderModulePlaceholder } from '../../shared/ui/module-placeholder.js';
+
 export const moduleManifest = {
   id: 'settings',
   title: 'Настройки',
@@ -8,7 +10,15 @@ export const moduleManifest = {
 };
 
 export function mount(container) {
-  container.innerHTML = `<article class="module-card"><h1>${moduleManifest.title}</h1><p>${moduleManifest.description}</p></article>`;
+  container.innerHTML = renderModulePlaceholder({
+    manifest: moduleManifest,
+    status: 'Рабочий контур',
+    actions: [
+      'Хранить настройки бренда и рабочих часов',
+      'Не размещать секреты и API-ключи во фронтенде',
+      'Развести тарифы, интеграции и права доступа'
+    ]
+  });
 }
 
 export function unmount() {}
